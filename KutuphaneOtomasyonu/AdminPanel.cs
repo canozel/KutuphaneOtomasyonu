@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace KutuphaneOtomasyonu {
     public partial class AdminPanel : Form {
         BooksController books_controller;
-        MemberController member_controller;
         DepositController deposit_controller;
-
-        String show = "books";
+        MemberController member_controller;
 
         public AdminPanel() {
             InitializeComponent();
             books_controller = new BooksController();
-            member_controller = new MemberController();
             deposit_controller = new DepositController();
+            member_controller = new MemberController();
 
             cbBookLang.Items.Add("Türkçe");
             cbBookLang.Items.Add("İngilizce");
@@ -26,8 +26,7 @@ namespace KutuphaneOtomasyonu {
             cbBookPublisher.ValueMember = "id";
             cbBookPublisher.DataSource = books_controller.getPubliser();
 
-            cbMemberGender.Items.Add("Erkek");
-            cbMemberGender.Items.Add("Kadın");
+
        }
 
         // Anasayfaya dönüş.
@@ -39,38 +38,7 @@ namespace KutuphaneOtomasyonu {
 
         // DataGridView'in yenilenmesini sağlar.
         void reflesh(String getMethod) {
-            if (getMethod.Equals("books")){
-                show = "books";
-                dataGridView.DataSource = books_controller.getBooks();
-            }else if (getMethod.Equals("members")){
-                show = "members";
-                dataGridView.DataSource = member_controller.getMembers();
-            }
-        }
-
-        // DataGridView'de tıklanılan verileri kutucuklara aktarma.
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (show.Equals("books")) {
-                tbBookISBN.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
-                tbBookName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
-                dtpBookPublised.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
-                tbBookPage.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
-                cbBookLang.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
-                tbBookDesc.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
-                cbBookAuthor.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
-                btnBookEdit.Enabled = true;
-                btnBookDelete.Enabled = true;
-            } else if (show.Equals("members")) {
-                tbMemberFirstName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
-                tbMemberLastName.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
-                cbMemberGender.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
-                tbMemberPhone.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
-                tbMemberTC.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
-                tbMemberEmail.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
-                tbMemberAdress.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
-                btnMemberEdit.Enabled = true;
-                btnMemberDelete.Enabled = true;
-            }
+             dataGridView.DataSource = books_controller.getBooks();
         }
 
         #region Books
@@ -112,49 +80,27 @@ namespace KutuphaneOtomasyonu {
         private void btnBookList_Click(object sender, EventArgs e) {
             reflesh("books");
         }
-        #endregion
 
-        #region Members
-        // Yeni üye ekleme.
-        private void btnMemberAdd_Click(object sender, EventArgs e) {
-            if (tbMemberFirstName.Text != "" && tbMemberLastName.Text!= "" && cbMemberGender.Text != "" && tbMemberTC.Text != "" && tbMemberPhone.Text != "" 
-                && tbMemberEmail.Text != "" && tbMemberAdress.Text != "") {
-                    member_controller.memberAdd(tbMemberFirstName.Text, tbMemberLastName.Text, cbMemberGender.Text,
-                    tbMemberTC.Text, tbMemberPhone.Text, tbMemberEmail.Text, tbMemberAdress.Text);
-                reflesh("members");
-            } else {
-                MessageBox.Show("Eksik girdiniz!", "BİLGİLENDİRME");
-            }
+        private void btnClear_Click(object sender, EventArgs e) {
+            tbBookName.Clear();
+            tbBookISBN.Clear();
+            tbBookPage.Clear();
+            tbBookDesc.Clear();
         }
 
-        // Üye güncelleme
-        private void btnMemberEdit_Click(object sender, EventArgs e) {
-            String member_id = dataGridView.CurrentRow.Cells[0].Value.ToString();
-            if (tbMemberFirstName.Text != "" && tbMemberLastName.Text!= "" && cbMemberGender.Text != "" && tbMemberTC.Text != "" && tbMemberPhone.Text != "" 
-                && tbMemberEmail.Text != "" && tbMemberAdress.Text != "") {
-                if (member_controller.updateMember(member_id, tbMemberFirstName.Text, tbMemberLastName.Text, cbMemberGender.Text, tbMemberPhone.Text, tbMemberTC.Text,
-                    tbMemberEmail.Text, tbMemberAdress.Text))
-                    MessageBox.Show("Başarıyla güncellendi.");
-                reflesh("members");
-            } else {
-                MessageBox.Show("Eksik girdiniz!", "BİLGİLENDİRME");
-            }
+        // DataGridView'de tıklanılan verileri kutucuklara aktarma.
+        private void btnSelected_Click(object sender, EventArgs e) {
+            tbBookISBN.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
+            tbBookName.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
+            dtpBookPublised.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
+            tbBookPage.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
+            cbBookLang.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
+            tbBookDesc.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
+            cbBookAuthor.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
+            btnBookEdit.Enabled = true;
+            btnBookDelete.Enabled = true;
         }
 
-        // Üye silme
-        private void btnMemberDelete_Click(object sender, EventArgs e) {
-            DialogResult result = MessageBox.Show("Silmek istediğnize emin misiniz ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes) {
-                if (member_controller.deleteMember(dataGridView.CurrentRow.Cells[0].Value.ToString()))
-                    MessageBox.Show("Başarıyla silindi.");
-                reflesh("members");
-            }
-        }
-
-        // Üye listeleme
-        private void btnMemberList_Click(object sender, EventArgs e) {
-            reflesh("members");
-        }
         #endregion
 
         #region Deposit
@@ -163,13 +109,11 @@ namespace KutuphaneOtomasyonu {
 
         // Kitap Ara
         private void btnFindBook_Click(object sender, EventArgs e) {
-           show = "books";
            dataGridView.DataSource = books_controller.BookFind(tbFindBook.Text);
         }
 
         // Üye Ara
         private void btnFindMember_Click(object sender, EventArgs e) {
-            show = "members";
             dataGridView.DataSource = member_controller.memberFind(tbFindMember.Text);
         }
 
@@ -189,15 +133,60 @@ namespace KutuphaneOtomasyonu {
         private void btnDeposit_Click(object sender, EventArgs e) {
             deposit_controller.addDeposit(selectedMemberID, selectedBookID, dtpDepositDate.Value.Date.ToString("dd-MM-yyyy"));
             dataGridView.DataSource =  deposit_controller.getDeposits();
-            show = "deposit";
         }
 
         // Emanetleri listele
         private void btnListDeposit_Click(object sender, EventArgs e) {
             dataGridView.DataSource =  deposit_controller.getDeposits();
-            show = "deposit";
+        }
+
+        // Compenetleri temizle
+        private void button4_Click(object sender, EventArgs e) {
+            tbDepositBookName.Clear();
+            tbDepositMemberName.Clear();
+            tbFindBook.Clear();
+            tbFindMember.Clear();
         }
         
         #endregion
+
+        private void btnBack_Click_1(object sender, EventArgs e) {
+            FindForm frm = new FindForm();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void btnGoMember_Click(object sender, EventArgs e) {
+            MemberView frm = new MemberView();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e) {
+            Excel.Application excel = new Excel.Application();
+            excel.Visible = true;
+            object Missing = Type.Missing;
+            Workbook workbook = excel.Workbooks.Add(Missing);
+            Worksheet sheet1 = (Worksheet) workbook.Sheets[1];
+            int StartCol = 1;
+            int StartRow = 1;
+            for (int j = 0; j < dataGridView.Columns.Count; j++) {
+                Range myRange = (Range) sheet1.Cells[StartRow, StartCol + j];
+                myRange.Value2 = dataGridView.Columns[j].HeaderText;
+            }
+            StartRow++;
+            for (int i = 0; i < dataGridView.Rows.Count; i++) {
+                for (int j = 0; j < dataGridView.Columns.Count; j++) {
+
+                    Range myRange = (Range) sheet1.Cells[StartRow + i, StartCol + j];
+                    myRange.Value2 = dataGridView[j, i].Value == null ? "" : dataGridView[j, i].Value;
+                    myRange.Select();
+                }
+            }
+        }
+
+        private void btnOverdue_Click(object sender, EventArgs e) {
+            dataGridView.DataSource = deposit_controller.getOverdueBooks();
+        }
     }
 }

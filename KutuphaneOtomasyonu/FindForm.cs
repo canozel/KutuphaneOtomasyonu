@@ -25,9 +25,9 @@ namespace KutuphaneOtomasyonu
         }
 
         private void btnAdmin_Click(object sender, EventArgs e) {
-            Login frm = new Login();
-            frm.Show();
-            this.Hide();
+                Login frm = new Login();
+                frm.Show();
+                this.Hide();
         }
     }
 }

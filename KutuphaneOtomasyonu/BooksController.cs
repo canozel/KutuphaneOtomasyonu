@@ -13,7 +13,7 @@ namespace KutuphaneOtomasyonu
         String[] KEYS = { "ISBN", "name", "publised_date", "number_of_pages", "language", "description", "publisher_id", "author_id"}; //book tablosunun kolonları
 
         // Kitap ve kitap ile bağlantılı olan verileri gerekli tablolara kaydetme
-        public String BookAdd(String isbn, String name, String publised, String pages, String language, String description, String publiser_id, String author_id) {
+        public bool BookAdd(String isbn, String name, String publised, String pages, String language, String description, String publiser_id, String author_id) {
             // book tablosuna verilen değerleri ekleme
             return add(TABLE_NAME, KEYS, 
                         isbn, name, publised, pages, language, description, publiser_id, author_id );
@@ -45,13 +45,13 @@ namespace KutuphaneOtomasyonu
         }
 
         // Yazar ekleme.
-        public String AuthorAdd(String name) {
+        public bool AuthorAdd(String name) {
             String[] author_keys = {"name"};
             return add("author", author_keys , name);
         }
 
         // Yayınevi ekleme.
-        public String PublisherAdd(String name) {
+        public bool PublisherAdd(String name) {
             String[] publisher_keys = { "name" };
             return add("publisher", publisher_keys, name);
         }

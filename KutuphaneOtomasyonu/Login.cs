@@ -10,17 +10,15 @@ using System.Windows.Forms;
 
 namespace KutuphaneOtomasyonu {
     public partial class Login : Form {
-        //FIXME 
-        // verilerin veri tabanından çekilmesi gerekiyor. geçici olarak dursunlar.
-        String USER = "vtys";
-        String PASS = "vtys";
+        MemberController member_controller;
 
         public Login() {
             InitializeComponent();
+            member_controller = new MemberController();
         }
 
         private void btnLogin_Click(object sender, EventArgs e) {
-            if (tbMember.Text == USER && tbPassword.Text == PASS) {
+            if (member_controller.passwordControl(tbMember.Text, tbPassword.Text)) {
                 AdminPanel frm = new AdminPanel();
                 frm.Show();
                 this.Hide();

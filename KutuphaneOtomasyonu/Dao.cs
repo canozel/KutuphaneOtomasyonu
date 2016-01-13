@@ -13,7 +13,7 @@ namespace KutuphaneOtomasyonu
         }
 
         // Veri tabanına, aldığı tablo adı, keyleri ve value parametrelerine göre ekleme yapma. 
-        protected String add(String table_name, String[] key_params, params String[] value_params) {
+        protected bool add(String table_name, String[] key_params, params String[] value_params) {
             String keys = string.Join(",", key_params);
             String values = "";
             for (int i = 0; i < key_params.Length; i++ )
@@ -62,17 +62,17 @@ namespace KutuphaneOtomasyonu
         }
 
         // Ekleme işlmeleri için kullanılan veritabanı işlemi
-        protected String runScalar(SqlCommand cmd ) {
-            String tmp = "";
+        protected bool runScalar(SqlCommand cmd ) {
+            Object tmp= null;
             try{
                 con.Open();
-                tmp = cmd.ExecuteScalar().ToString();
+                tmp = cmd.ExecuteScalar();
             }catch (Exception){
             }
             finally{
                 con.Close();
             }
-            return tmp;
+            return tmp != DBNull.Value && tmp != null;
         }
 
         // Güncelleme ve Silme işlmeleri için kullanılan veritabanı işlemi

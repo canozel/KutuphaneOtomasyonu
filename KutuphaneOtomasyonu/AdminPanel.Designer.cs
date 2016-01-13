@@ -25,6 +25,8 @@
         private void InitializeComponent() {
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.gbBook = new System.Windows.Forms.GroupBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnSelected = new System.Windows.Forms.Button();
             this.btnBookList = new System.Windows.Forms.Button();
             this.btnBookDelete = new System.Windows.Forms.Button();
             this.btnBookEdit = new System.Windows.Forms.Button();
@@ -45,26 +47,10 @@
             this.lblISBN = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.tbBookName = new System.Windows.Forms.TextBox();
-            this.gbMember = new System.Windows.Forms.GroupBox();
-            this.btnMemberList = new System.Windows.Forms.Button();
-            this.tbMemberPhone = new System.Windows.Forms.TextBox();
-            this.tbMemberTC = new System.Windows.Forms.TextBox();
-            this.btnMemberDelete = new System.Windows.Forms.Button();
-            this.btnMemberEdit = new System.Windows.Forms.Button();
-            this.btnMemberAdd = new System.Windows.Forms.Button();
-            this.tbMemberAdress = new System.Windows.Forms.TextBox();
-            this.lblAdress = new System.Windows.Forms.Label();
-            this.lblEmail = new System.Windows.Forms.Label();
-            this.lblPhone = new System.Windows.Forms.Label();
-            this.lblTC = new System.Windows.Forms.Label();
-            this.cbMemberGender = new System.Windows.Forms.ComboBox();
-            this.lblGender = new System.Windows.Forms.Label();
-            this.tbMemberEmail = new System.Windows.Forms.TextBox();
-            this.tbMemberLastName = new System.Windows.Forms.TextBox();
-            this.lblLastName = new System.Windows.Forms.Label();
-            this.lblFirstName = new System.Windows.Forms.Label();
-            this.tbMemberFirstName = new System.Windows.Forms.TextBox();
             this.gbDeposit = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btnOverdue = new System.Windows.Forms.Button();
+            this.btnListDeposit = new System.Windows.Forms.Button();
             this.btnSelectMember = new System.Windows.Forms.Button();
             this.btnSelectBook = new System.Windows.Forms.Button();
             this.dtpDepositDate = new System.Windows.Forms.DateTimePicker();
@@ -76,10 +62,10 @@
             this.tbFindMember = new System.Windows.Forms.TextBox();
             this.tbFindBook = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnListDeposit = new System.Windows.Forms.Button();
+            this.btnGoMember = new System.Windows.Forms.Button();
+            this.btnExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.gbBook.SuspendLayout();
-            this.gbMember.SuspendLayout();
             this.gbDeposit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,14 +74,15 @@
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView.Location = new System.Drawing.Point(0, 397);
+            this.dataGridView.Location = new System.Drawing.Point(0, 436);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(1197, 223);
+            this.dataGridView.Size = new System.Drawing.Size(989, 243);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // gbBook
             // 
+            this.gbBook.Controls.Add(this.btnClear);
+            this.gbBook.Controls.Add(this.btnSelected);
             this.gbBook.Controls.Add(this.btnBookList);
             this.gbBook.Controls.Add(this.btnBookDelete);
             this.gbBook.Controls.Add(this.btnBookEdit);
@@ -116,18 +103,39 @@
             this.gbBook.Controls.Add(this.lblISBN);
             this.gbBook.Controls.Add(this.lblName);
             this.gbBook.Controls.Add(this.tbBookName);
-            this.gbBook.Location = new System.Drawing.Point(55, 2);
+            this.gbBook.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbBook.Location = new System.Drawing.Point(0, 0);
             this.gbBook.Name = "gbBook";
-            this.gbBook.Size = new System.Drawing.Size(360, 389);
+            this.gbBook.Size = new System.Drawing.Size(446, 436);
             this.gbBook.TabIndex = 1;
             this.gbBook.TabStop = false;
             this.gbBook.Text = "Kitaplar";
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(294, 360);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(79, 23);
+            this.btnClear.TabIndex = 37;
+            this.btnClear.Text = "Temizle";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSelected
+            // 
+            this.btnSelected.Location = new System.Drawing.Point(177, 360);
+            this.btnSelected.Name = "btnSelected";
+            this.btnSelected.Size = new System.Drawing.Size(111, 23);
+            this.btnSelected.TabIndex = 36;
+            this.btnSelected.Text = "Seçileni Aktar";
+            this.btnSelected.UseVisualStyleBackColor = true;
+            this.btnSelected.Click += new System.EventHandler(this.btnSelected_Click);
+            // 
             // btnBookList
             // 
-            this.btnBookList.Location = new System.Drawing.Point(17, 360);
+            this.btnBookList.Location = new System.Drawing.Point(73, 360);
             this.btnBookList.Name = "btnBookList";
-            this.btnBookList.Size = new System.Drawing.Size(75, 23);
+            this.btnBookList.Size = new System.Drawing.Size(98, 23);
             this.btnBookList.TabIndex = 35;
             this.btnBookList.Text = "Listele";
             this.btnBookList.UseVisualStyleBackColor = true;
@@ -136,9 +144,9 @@
             // btnBookDelete
             // 
             this.btnBookDelete.Enabled = false;
-            this.btnBookDelete.Location = new System.Drawing.Point(258, 360);
+            this.btnBookDelete.Location = new System.Drawing.Point(294, 389);
             this.btnBookDelete.Name = "btnBookDelete";
-            this.btnBookDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnBookDelete.Size = new System.Drawing.Size(79, 23);
             this.btnBookDelete.TabIndex = 34;
             this.btnBookDelete.Text = "Sil";
             this.btnBookDelete.UseVisualStyleBackColor = true;
@@ -147,9 +155,9 @@
             // btnBookEdit
             // 
             this.btnBookEdit.Enabled = false;
-            this.btnBookEdit.Location = new System.Drawing.Point(177, 360);
+            this.btnBookEdit.Location = new System.Drawing.Point(177, 389);
             this.btnBookEdit.Name = "btnBookEdit";
-            this.btnBookEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnBookEdit.Size = new System.Drawing.Size(111, 23);
             this.btnBookEdit.TabIndex = 33;
             this.btnBookEdit.Text = "Düzenle";
             this.btnBookEdit.UseVisualStyleBackColor = true;
@@ -157,9 +165,9 @@
             // 
             // btnBookAdd
             // 
-            this.btnBookAdd.Location = new System.Drawing.Point(96, 360);
+            this.btnBookAdd.Location = new System.Drawing.Point(73, 389);
             this.btnBookAdd.Name = "btnBookAdd";
-            this.btnBookAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnBookAdd.Size = new System.Drawing.Size(98, 23);
             this.btnBookAdd.TabIndex = 32;
             this.btnBookAdd.Text = "Ekle";
             this.btnBookAdd.UseVisualStyleBackColor = true;
@@ -167,7 +175,7 @@
             // 
             // tbBookDesc
             // 
-            this.tbBookDesc.Location = new System.Drawing.Point(100, 273);
+            this.tbBookDesc.Location = new System.Drawing.Point(140, 273);
             this.tbBookDesc.Multiline = true;
             this.tbBookDesc.Name = "tbBookDesc";
             this.tbBookDesc.Size = new System.Drawing.Size(233, 77);
@@ -176,7 +184,7 @@
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(30, 276);
+            this.lblDesc.Location = new System.Drawing.Point(70, 276);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(50, 13);
             this.lblDesc.TabIndex = 30;
@@ -185,7 +193,7 @@
             // lblPage
             // 
             this.lblPage.AutoSize = true;
-            this.lblPage.Location = new System.Drawing.Point(222, 235);
+            this.lblPage.Location = new System.Drawing.Point(262, 235);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(64, 13);
             this.lblPage.TabIndex = 29;
@@ -194,7 +202,7 @@
             // lblLang
             // 
             this.lblLang.AutoSize = true;
-            this.lblLang.Location = new System.Drawing.Point(30, 235);
+            this.lblLang.Location = new System.Drawing.Point(70, 235);
             this.lblLang.Name = "lblLang";
             this.lblLang.Size = new System.Drawing.Size(19, 13);
             this.lblLang.TabIndex = 28;
@@ -205,7 +213,7 @@
             this.cbBookLang.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBookLang.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBookLang.FormattingEnabled = true;
-            this.cbBookLang.Location = new System.Drawing.Point(100, 231);
+            this.cbBookLang.Location = new System.Drawing.Point(140, 231);
             this.cbBookLang.Name = "cbBookLang";
             this.cbBookLang.Size = new System.Drawing.Size(116, 21);
             this.cbBookLang.TabIndex = 27;
@@ -213,7 +221,7 @@
             // lblPublised
             // 
             this.lblPublised.AutoSize = true;
-            this.lblPublised.Location = new System.Drawing.Point(28, 193);
+            this.lblPublised.Location = new System.Drawing.Point(68, 193);
             this.lblPublised.Name = "lblPublised";
             this.lblPublised.Size = new System.Drawing.Size(64, 13);
             this.lblPublised.TabIndex = 26;
@@ -221,7 +229,7 @@
             // 
             // dtpBookPublised
             // 
-            this.dtpBookPublised.Location = new System.Drawing.Point(100, 193);
+            this.dtpBookPublised.Location = new System.Drawing.Point(140, 193);
             this.dtpBookPublised.Name = "dtpBookPublised";
             this.dtpBookPublised.Size = new System.Drawing.Size(233, 20);
             this.dtpBookPublised.TabIndex = 25;
@@ -229,7 +237,7 @@
             // lblPubliser
             // 
             this.lblPubliser.AutoSize = true;
-            this.lblPubliser.Location = new System.Drawing.Point(28, 153);
+            this.lblPubliser.Location = new System.Drawing.Point(68, 153);
             this.lblPubliser.Name = "lblPubliser";
             this.lblPubliser.Size = new System.Drawing.Size(51, 13);
             this.lblPubliser.TabIndex = 24;
@@ -240,7 +248,7 @@
             this.cbBookPublisher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBookPublisher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBookPublisher.FormattingEnabled = true;
-            this.cbBookPublisher.Location = new System.Drawing.Point(100, 150);
+            this.cbBookPublisher.Location = new System.Drawing.Point(140, 150);
             this.cbBookPublisher.Name = "cbBookPublisher";
             this.cbBookPublisher.Size = new System.Drawing.Size(233, 21);
             this.cbBookPublisher.TabIndex = 23;
@@ -250,7 +258,7 @@
             this.cbBookAuthor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbBookAuthor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBookAuthor.FormattingEnabled = true;
-            this.cbBookAuthor.Location = new System.Drawing.Point(100, 111);
+            this.cbBookAuthor.Location = new System.Drawing.Point(140, 111);
             this.cbBookAuthor.Name = "cbBookAuthor";
             this.cbBookAuthor.Size = new System.Drawing.Size(233, 21);
             this.cbBookAuthor.TabIndex = 22;
@@ -258,7 +266,7 @@
             // lblAuthor
             // 
             this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Location = new System.Drawing.Point(28, 114);
+            this.lblAuthor.Location = new System.Drawing.Point(68, 114);
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(34, 13);
             this.lblAuthor.TabIndex = 21;
@@ -266,14 +274,14 @@
             // 
             // tbBookPage
             // 
-            this.tbBookPage.Location = new System.Drawing.Point(292, 232);
+            this.tbBookPage.Location = new System.Drawing.Point(332, 232);
             this.tbBookPage.Name = "tbBookPage";
             this.tbBookPage.Size = new System.Drawing.Size(41, 20);
             this.tbBookPage.TabIndex = 20;
             // 
             // tbBookISBN
             // 
-            this.tbBookISBN.Location = new System.Drawing.Point(100, 68);
+            this.tbBookISBN.Location = new System.Drawing.Point(140, 68);
             this.tbBookISBN.Name = "tbBookISBN";
             this.tbBookISBN.Size = new System.Drawing.Size(233, 20);
             this.tbBookISBN.TabIndex = 19;
@@ -281,7 +289,7 @@
             // lblISBN
             // 
             this.lblISBN.AutoSize = true;
-            this.lblISBN.Location = new System.Drawing.Point(28, 71);
+            this.lblISBN.Location = new System.Drawing.Point(68, 71);
             this.lblISBN.Name = "lblISBN";
             this.lblISBN.Size = new System.Drawing.Size(32, 13);
             this.lblISBN.TabIndex = 18;
@@ -290,7 +298,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(30, 31);
+            this.lblName.Location = new System.Drawing.Point(70, 31);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(49, 13);
             this.lblName.TabIndex = 17;
@@ -298,198 +306,15 @@
             // 
             // tbBookName
             // 
-            this.tbBookName.Location = new System.Drawing.Point(100, 28);
+            this.tbBookName.Location = new System.Drawing.Point(140, 28);
             this.tbBookName.Name = "tbBookName";
             this.tbBookName.Size = new System.Drawing.Size(233, 20);
             this.tbBookName.TabIndex = 16;
             // 
-            // gbMember
-            // 
-            this.gbMember.Controls.Add(this.btnMemberList);
-            this.gbMember.Controls.Add(this.tbMemberPhone);
-            this.gbMember.Controls.Add(this.tbMemberTC);
-            this.gbMember.Controls.Add(this.btnMemberDelete);
-            this.gbMember.Controls.Add(this.btnMemberEdit);
-            this.gbMember.Controls.Add(this.btnMemberAdd);
-            this.gbMember.Controls.Add(this.tbMemberAdress);
-            this.gbMember.Controls.Add(this.lblAdress);
-            this.gbMember.Controls.Add(this.lblEmail);
-            this.gbMember.Controls.Add(this.lblPhone);
-            this.gbMember.Controls.Add(this.lblTC);
-            this.gbMember.Controls.Add(this.cbMemberGender);
-            this.gbMember.Controls.Add(this.lblGender);
-            this.gbMember.Controls.Add(this.tbMemberEmail);
-            this.gbMember.Controls.Add(this.tbMemberLastName);
-            this.gbMember.Controls.Add(this.lblLastName);
-            this.gbMember.Controls.Add(this.lblFirstName);
-            this.gbMember.Controls.Add(this.tbMemberFirstName);
-            this.gbMember.Location = new System.Drawing.Point(421, 2);
-            this.gbMember.Name = "gbMember";
-            this.gbMember.Size = new System.Drawing.Size(360, 389);
-            this.gbMember.TabIndex = 2;
-            this.gbMember.TabStop = false;
-            this.gbMember.Text = "Üyeler";
-            // 
-            // btnMemberList
-            // 
-            this.btnMemberList.Location = new System.Drawing.Point(16, 360);
-            this.btnMemberList.Name = "btnMemberList";
-            this.btnMemberList.Size = new System.Drawing.Size(75, 23);
-            this.btnMemberList.TabIndex = 36;
-            this.btnMemberList.Text = "Listele";
-            this.btnMemberList.UseVisualStyleBackColor = true;
-            this.btnMemberList.Click += new System.EventHandler(this.btnMemberList_Click);
-            // 
-            // tbMemberPhone
-            // 
-            this.tbMemberPhone.Location = new System.Drawing.Point(101, 193);
-            this.tbMemberPhone.Name = "tbMemberPhone";
-            this.tbMemberPhone.Size = new System.Drawing.Size(233, 20);
-            this.tbMemberPhone.TabIndex = 55;
-            // 
-            // tbMemberTC
-            // 
-            this.tbMemberTC.Location = new System.Drawing.Point(101, 150);
-            this.tbMemberTC.Name = "tbMemberTC";
-            this.tbMemberTC.Size = new System.Drawing.Size(233, 20);
-            this.tbMemberTC.TabIndex = 54;
-            // 
-            // btnMemberDelete
-            // 
-            this.btnMemberDelete.Enabled = false;
-            this.btnMemberDelete.Location = new System.Drawing.Point(259, 360);
-            this.btnMemberDelete.Name = "btnMemberDelete";
-            this.btnMemberDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnMemberDelete.TabIndex = 53;
-            this.btnMemberDelete.Text = "Sil";
-            this.btnMemberDelete.UseVisualStyleBackColor = true;
-            this.btnMemberDelete.Click += new System.EventHandler(this.btnMemberDelete_Click);
-            // 
-            // btnMemberEdit
-            // 
-            this.btnMemberEdit.Enabled = false;
-            this.btnMemberEdit.Location = new System.Drawing.Point(178, 360);
-            this.btnMemberEdit.Name = "btnMemberEdit";
-            this.btnMemberEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnMemberEdit.TabIndex = 52;
-            this.btnMemberEdit.Text = "Düzenle";
-            this.btnMemberEdit.UseVisualStyleBackColor = true;
-            this.btnMemberEdit.Click += new System.EventHandler(this.btnMemberEdit_Click);
-            // 
-            // btnMemberAdd
-            // 
-            this.btnMemberAdd.Location = new System.Drawing.Point(97, 360);
-            this.btnMemberAdd.Name = "btnMemberAdd";
-            this.btnMemberAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnMemberAdd.TabIndex = 51;
-            this.btnMemberAdd.Text = "Ekle";
-            this.btnMemberAdd.UseVisualStyleBackColor = true;
-            this.btnMemberAdd.Click += new System.EventHandler(this.btnMemberAdd_Click);
-            // 
-            // tbMemberAdress
-            // 
-            this.tbMemberAdress.Location = new System.Drawing.Point(101, 273);
-            this.tbMemberAdress.Multiline = true;
-            this.tbMemberAdress.Name = "tbMemberAdress";
-            this.tbMemberAdress.Size = new System.Drawing.Size(233, 77);
-            this.tbMemberAdress.TabIndex = 50;
-            // 
-            // lblAdress
-            // 
-            this.lblAdress.AutoSize = true;
-            this.lblAdress.Location = new System.Drawing.Point(31, 276);
-            this.lblAdress.Name = "lblAdress";
-            this.lblAdress.Size = new System.Drawing.Size(34, 13);
-            this.lblAdress.TabIndex = 49;
-            this.lblAdress.Text = "Adres";
-            // 
-            // lblEmail
-            // 
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(29, 232);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(32, 13);
-            this.lblEmail.TabIndex = 48;
-            this.lblEmail.Text = "Email";
-            // 
-            // lblPhone
-            // 
-            this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(29, 193);
-            this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(43, 13);
-            this.lblPhone.TabIndex = 45;
-            this.lblPhone.Text = "Telefon";
-            // 
-            // lblTC
-            // 
-            this.lblTC.AutoSize = true;
-            this.lblTC.Location = new System.Drawing.Point(29, 153);
-            this.lblTC.Name = "lblTC";
-            this.lblTC.Size = new System.Drawing.Size(21, 13);
-            this.lblTC.TabIndex = 43;
-            this.lblTC.Text = "TC";
-            // 
-            // cbMemberGender
-            // 
-            this.cbMemberGender.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbMemberGender.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbMemberGender.FormattingEnabled = true;
-            this.cbMemberGender.Location = new System.Drawing.Point(101, 111);
-            this.cbMemberGender.Name = "cbMemberGender";
-            this.cbMemberGender.Size = new System.Drawing.Size(233, 21);
-            this.cbMemberGender.TabIndex = 41;
-            // 
-            // lblGender
-            // 
-            this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(29, 114);
-            this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(43, 13);
-            this.lblGender.TabIndex = 40;
-            this.lblGender.Text = "Cinsiyet";
-            // 
-            // tbMemberEmail
-            // 
-            this.tbMemberEmail.Location = new System.Drawing.Point(101, 232);
-            this.tbMemberEmail.Name = "tbMemberEmail";
-            this.tbMemberEmail.Size = new System.Drawing.Size(233, 20);
-            this.tbMemberEmail.TabIndex = 39;
-            // 
-            // tbMemberLastName
-            // 
-            this.tbMemberLastName.Location = new System.Drawing.Point(101, 68);
-            this.tbMemberLastName.Name = "tbMemberLastName";
-            this.tbMemberLastName.Size = new System.Drawing.Size(233, 20);
-            this.tbMemberLastName.TabIndex = 38;
-            // 
-            // lblLastName
-            // 
-            this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(29, 71);
-            this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(43, 13);
-            this.lblLastName.TabIndex = 37;
-            this.lblLastName.Text = "Soy Adı";
-            // 
-            // lblFirstName
-            // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(31, 31);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(22, 13);
-            this.lblFirstName.TabIndex = 36;
-            this.lblFirstName.Text = "Adı";
-            // 
-            // tbMemberFirstName
-            // 
-            this.tbMemberFirstName.Location = new System.Drawing.Point(101, 28);
-            this.tbMemberFirstName.Name = "tbMemberFirstName";
-            this.tbMemberFirstName.Size = new System.Drawing.Size(233, 20);
-            this.tbMemberFirstName.TabIndex = 35;
-            // 
             // gbDeposit
             // 
+            this.gbDeposit.Controls.Add(this.button4);
+            this.gbDeposit.Controls.Add(this.btnOverdue);
             this.gbDeposit.Controls.Add(this.btnListDeposit);
             this.gbDeposit.Controls.Add(this.btnSelectMember);
             this.gbDeposit.Controls.Add(this.btnSelectBook);
@@ -501,12 +326,43 @@
             this.gbDeposit.Controls.Add(this.tbDepositBookName);
             this.gbDeposit.Controls.Add(this.tbFindMember);
             this.gbDeposit.Controls.Add(this.tbFindBook);
-            this.gbDeposit.Location = new System.Drawing.Point(787, 2);
+            this.gbDeposit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbDeposit.Location = new System.Drawing.Point(446, 0);
             this.gbDeposit.Name = "gbDeposit";
-            this.gbDeposit.Size = new System.Drawing.Size(360, 389);
+            this.gbDeposit.Size = new System.Drawing.Size(402, 436);
             this.gbDeposit.TabIndex = 2;
             this.gbDeposit.TabStop = false;
             this.gbDeposit.Text = "Emanet";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(40, 360);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(162, 23);
+            this.button4.TabIndex = 38;
+            this.button4.Text = "Temizle";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btnOverdue
+            // 
+            this.btnOverdue.Location = new System.Drawing.Point(208, 360);
+            this.btnOverdue.Name = "btnOverdue";
+            this.btnOverdue.Size = new System.Drawing.Size(146, 23);
+            this.btnOverdue.TabIndex = 69;
+            this.btnOverdue.Text = "Gecikenler";
+            this.btnOverdue.UseVisualStyleBackColor = true;
+            this.btnOverdue.Click += new System.EventHandler(this.btnOverdue_Click);
+            // 
+            // btnListDeposit
+            // 
+            this.btnListDeposit.Location = new System.Drawing.Point(40, 327);
+            this.btnListDeposit.Name = "btnListDeposit";
+            this.btnListDeposit.Size = new System.Drawing.Size(162, 23);
+            this.btnListDeposit.TabIndex = 68;
+            this.btnListDeposit.Text = "Emanetleri Listele";
+            this.btnListDeposit.UseVisualStyleBackColor = true;
+            this.btnListDeposit.Click += new System.EventHandler(this.btnListDeposit_Click);
             // 
             // btnSelectMember
             // 
@@ -537,7 +393,7 @@
             // 
             // btnFindMember
             // 
-            this.btnFindMember.Location = new System.Drawing.Point(245, 66);
+            this.btnFindMember.Location = new System.Drawing.Point(279, 66);
             this.btnFindMember.Name = "btnFindMember";
             this.btnFindMember.Size = new System.Drawing.Size(75, 23);
             this.btnFindMember.TabIndex = 62;
@@ -547,7 +403,7 @@
             // 
             // btnFindBook
             // 
-            this.btnFindBook.Location = new System.Drawing.Point(245, 26);
+            this.btnFindBook.Location = new System.Drawing.Point(279, 26);
             this.btnFindBook.Name = "btnFindBook";
             this.btnFindBook.Size = new System.Drawing.Size(75, 23);
             this.btnFindBook.TabIndex = 61;
@@ -557,9 +413,9 @@
             // 
             // btnDeposit
             // 
-            this.btnDeposit.Location = new System.Drawing.Point(279, 327);
+            this.btnDeposit.Location = new System.Drawing.Point(208, 327);
             this.btnDeposit.Name = "btnDeposit";
-            this.btnDeposit.Size = new System.Drawing.Size(75, 23);
+            this.btnDeposit.Size = new System.Drawing.Size(146, 23);
             this.btnDeposit.TabIndex = 59;
             this.btnDeposit.Text = "Emanet Ver";
             this.btnDeposit.UseVisualStyleBackColor = true;
@@ -581,46 +437,58 @@
             // 
             // tbFindMember
             // 
-            this.tbFindMember.Location = new System.Drawing.Point(6, 68);
+            this.tbFindMember.Location = new System.Drawing.Point(40, 68);
             this.tbFindMember.Name = "tbFindMember";
             this.tbFindMember.Size = new System.Drawing.Size(233, 20);
             this.tbFindMember.TabIndex = 56;
             // 
             // tbFindBook
             // 
-            this.tbFindBook.Location = new System.Drawing.Point(6, 28);
+            this.tbFindBook.Location = new System.Drawing.Point(40, 28);
             this.tbFindBook.Name = "tbFindBook";
             this.tbFindBook.Size = new System.Drawing.Size(233, 20);
             this.tbFindBook.TabIndex = 55;
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(1153, 12);
+            this.btnBack.Location = new System.Drawing.Point(854, 111);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(44, 23);
-            this.btnBack.TabIndex = 3;
-            this.btnBack.Text = "Geri";
+            this.btnBack.Size = new System.Drawing.Size(128, 60);
+            this.btnBack.TabIndex = 70;
+            this.btnBack.Text = "<- Çıkış";
             this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
             // 
-            // btnListDeposit
+            // btnGoMember
             // 
-            this.btnListDeposit.Location = new System.Drawing.Point(155, 327);
-            this.btnListDeposit.Name = "btnListDeposit";
-            this.btnListDeposit.Size = new System.Drawing.Size(118, 23);
-            this.btnListDeposit.TabIndex = 68;
-            this.btnListDeposit.Text = "Emanetleri Listele";
-            this.btnListDeposit.UseVisualStyleBackColor = true;
-            this.btnListDeposit.Click += new System.EventHandler(this.btnListDeposit_Click);
+            this.btnGoMember.Location = new System.Drawing.Point(854, 26);
+            this.btnGoMember.Name = "btnGoMember";
+            this.btnGoMember.Size = new System.Drawing.Size(128, 63);
+            this.btnGoMember.TabIndex = 71;
+            this.btnGoMember.Text = "Üyelik";
+            this.btnGoMember.UseVisualStyleBackColor = true;
+            this.btnGoMember.Click += new System.EventHandler(this.btnGoMember_Click);
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(854, 360);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(128, 61);
+            this.btnExcel.TabIndex = 72;
+            this.btnExcel.Text = "Excel\'e Aktar";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // AdminPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 620);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(989, 679);
+            this.Controls.Add(this.btnExcel);
+            this.Controls.Add(this.btnGoMember);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.gbDeposit);
-            this.Controls.Add(this.gbMember);
             this.Controls.Add(this.gbBook);
             this.Controls.Add(this.dataGridView);
             this.Name = "AdminPanel";
@@ -628,8 +496,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.gbBook.ResumeLayout(false);
             this.gbBook.PerformLayout();
-            this.gbMember.ResumeLayout(false);
-            this.gbMember.PerformLayout();
             this.gbDeposit.ResumeLayout(false);
             this.gbDeposit.PerformLayout();
             this.ResumeLayout(false);
@@ -640,7 +506,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.GroupBox gbBook;
-        private System.Windows.Forms.GroupBox gbMember;
         private System.Windows.Forms.GroupBox gbDeposit;
         private System.Windows.Forms.TextBox tbBookDesc;
         private System.Windows.Forms.Label lblDesc;
@@ -661,22 +526,6 @@
         private System.Windows.Forms.Button btnBookDelete;
         private System.Windows.Forms.Button btnBookEdit;
         private System.Windows.Forms.Button btnBookAdd;
-        private System.Windows.Forms.TextBox tbMemberTC;
-        private System.Windows.Forms.Button btnMemberDelete;
-        private System.Windows.Forms.Button btnMemberEdit;
-        private System.Windows.Forms.Button btnMemberAdd;
-        private System.Windows.Forms.TextBox tbMemberAdress;
-        private System.Windows.Forms.Label lblAdress;
-        private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.Label lblTC;
-        private System.Windows.Forms.ComboBox cbMemberGender;
-        private System.Windows.Forms.Label lblGender;
-        private System.Windows.Forms.TextBox tbMemberEmail;
-        private System.Windows.Forms.TextBox tbMemberLastName;
-        private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.Label lblFirstName;
-        private System.Windows.Forms.TextBox tbMemberFirstName;
         private System.Windows.Forms.DateTimePicker dtpDepositDate;
         private System.Windows.Forms.Button btnFindMember;
         private System.Windows.Forms.Button btnFindBook;
@@ -685,12 +534,16 @@
         private System.Windows.Forms.TextBox tbDepositBookName;
         private System.Windows.Forms.TextBox tbFindMember;
         private System.Windows.Forms.TextBox tbFindBook;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.TextBox tbMemberPhone;
         private System.Windows.Forms.Button btnBookList;
-        private System.Windows.Forms.Button btnMemberList;
         private System.Windows.Forms.Button btnSelectMember;
         private System.Windows.Forms.Button btnSelectBook;
         private System.Windows.Forms.Button btnListDeposit;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnSelected;
+        private System.Windows.Forms.Button btnOverdue;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnGoMember;
+        private System.Windows.Forms.Button btnExcel;
     }
 }
